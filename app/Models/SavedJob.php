@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class SavedJob extends Model
 {
@@ -12,4 +13,7 @@ class SavedJob extends Model
         "user_id",
         "job_id",
     ];
+    public function userSaveJob($job){
+        return SavedJob::where('user_id', Auth::user()->id)->where('job_id', $job)->exists();
+    }
 }

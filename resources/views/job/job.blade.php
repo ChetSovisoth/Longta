@@ -19,7 +19,7 @@
                     </div>
                     <div class="ms-3 d-flex flex-column justify-content-between">
                         {{-- Not Working --}}
-                        @if ((new App\Models\Job())->userSaveJob($job))
+                        @if ((new App\Models\SavedJob())->userSaveJob($job->id))
                             <form action="{{ route('unsave.job', $job) }}" method="POST">
                                 @csrf
                                 @method('POST')

@@ -11,7 +11,8 @@ class SaveJobController extends Controller
 {
     public function index(){
         $user = Auth::user();
-        $jobs = SavedJob::where("user_id", $user->id)->get();
+        $saved_jobs = SavedJob::where("user_id", $user->id)->get();
+        $jobs = Job::whereIn("id", $saved_jobs->pluck('job_id'))->get();
         return view('job.saved_job', compact('jobs'));
     }
     public function save($job){
