@@ -154,6 +154,71 @@ class JobsSeeder extends Seeder
                 'experience' => '2+ years',
                 'contact_email' => 'content@creativewriters.com',
                 'contact_phone' => '089876543'
+            ],
+
+            [
+                'user_id' => 1,
+                'title' => 'Software Engineer',
+                'company_name' => 'Tech Solutions Ltd.',
+                'description' => 'We are seeking a skilled Software Engineer to design, develop, and deploy software solutions. The ideal candidate should have strong programming skills and experience with modern software development practices.',
+                'location' => 'Phnom Penh',
+                'employment_type' => 'Full-Time',
+                'salary' => '$1000 - $1500',
+                'experience' => '3+ years',
+                'contact_email' => 'careers@techsolutions.com',
+                'contact_phone' => '012345678'
+            ],
+
+            [
+                'user_id' => 2,
+                'title' => 'Marketing Manager',
+                'company_name' => 'Global Marketing Agency',
+                'description' => 'Join our team as a Marketing Manager to oversee marketing campaigns, analyze market trends, and develop strategies to enhance brand awareness. Candidates should have a proven track record in digital marketing.',
+                'location' => 'Phnom Penh',
+                'employment_type' => 'Full-Time',
+                'salary' => '$800 - $1200',
+                'experience' => '4+ years',
+                'contact_email' => 'jobs@globalmarketing.com',
+                'contact_phone' => '087654321'
+            ],
+            
+            [
+                'user_id' => 3,
+                'title' => 'Customer Support Specialist',
+                'company_name' => 'Supportive Solutions Inc.',
+                'description' => 'We are hiring a Customer Support Specialist to provide exceptional support to our clients. This role involves resolving inquiries, troubleshooting issues, and ensuring customer satisfaction.',
+                'location' => 'Phnom Penh',
+                'employment_type' => 'Full-Time',
+                'salary' => '$600 - $900',
+                'experience' => '1+ years',
+                'contact_email' => 'careers@supportivesolutions.com',
+                'contact_phone' => '099887766'
+            ],
+            
+            [
+                'user_id' => 4,
+                'title' => 'Graphic Designer',
+                'company_name' => 'Creative Designs Co.',
+                'description' => 'Creative Designs Co. is looking for a talented Graphic Designer to create engaging visual content. The ideal candidate should have a strong portfolio demonstrating creativity and proficiency in design tools.',
+                'location' => 'Phnom Penh',
+                'employment_type' => 'Full-Time',
+                'salary' => '$700 - $1000',
+                'experience' => '2+ years',
+                'contact_email' => 'design@creativedesigns.com',
+                'contact_phone' => '066554433'
+            ],            
+            
+            [
+                'user_id' => 5,
+                'title' => 'HR Manager',
+                'company_name' => 'PeopleFirst HR Solutions',
+                'description' => 'Join our team as an HR Manager to oversee recruitment, employee relations, and HR policies. Candidates should have extensive experience in HR management and a strong understanding of labor laws.',
+                'location' => 'Phnom Penh',
+                'employment_type' => 'Full-Time',
+                'salary' => '$1200 - $1600',
+                'experience' => '5+ years',
+                'contact_email' => 'careers@peoplefirsthr.com',
+                'contact_phone' => '055443322'
             ]
             
         ];

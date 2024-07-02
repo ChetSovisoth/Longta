@@ -15,16 +15,8 @@ class SaveJobController extends Controller
         $jobs = Job::whereIn("id", $saved_jobs->pluck('job_id'))->get();
         return view('job.saved_job', compact('jobs'));
     }
-    public function save($job){
-        $user = Auth::user();
-
-        SavedJob::create(['user_id' => $user->id, 'job_id' => $job]);
-        return redirect()->route('jobs.index');
-    }
     public function unsave($job){
-        $user = Auth::user();
-
         SavedJob::where('job_id', $job)->delete();
-        return redirect()->route('jobs.index');
+        return redirect()->back()->with('danger','Job Unsaved!');
     }
 }

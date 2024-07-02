@@ -1,10 +1,12 @@
 @extends('layout.layout')
 @section('content')
     <div class="container rounded mt-5 mb-5">
-        <div class="row">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="text-right">CV Settings</h1>
-            </div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="text-right">CV Settings</h1>
+        </div>
+        <form class="row" action="{{ route('cv.store') }}" method="POST">
+            @csrf
+            @method('POST')
             <div class="d-flex">
                 <div class="col-md-3 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3">
@@ -16,10 +18,10 @@
                     </div>
                 </div>
                 <hr class="text-white border-2 h-100 my-4" />
-                <div class="col-md-5 border-right">
+                <div class="col-md-5 border-right mx-3">
                     <div class="p-3">
                         <div class="row mt-2">
-                            <h3>Contact Information</h3>
+                            <h3>Contact Section</h3>
                             <div class="col-md-12 mb-2">
                                 <label class="labels">Phone</label>
                                 <input type="text" class="form-control" placeholder="Phone number" name="phone">
@@ -41,7 +43,7 @@
                         <hr class="text-gray border-2 w-100 my-4" />
 
                         <div class="row mt-3">
-                            <h3>Education Information</h3>
+                            <h3>Education Section</h3>
                             <div class="col-md-12 mb-2">
                                 <label class="labels">University</label>
                                 <input type="text" class="form-control" placeholder="university" name="university">    
@@ -97,49 +99,80 @@
                             </div>
 
                         </div>
-                        <hr class="text-gray border-2 w-100 my-4" />
 
-                        <div class="container mt-3">
+                        {{-- <div class="container mt-3">
                             <div class="d-flex mb-3">
                                 <h2 class="flex-grow-1">Language Section</h2>
-                                <a class="text-decoration-none" type="button" id='add-language-btn'>
-                                    <div class="d-flex justify-content-between align-items-center experience">
-                                        <span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Language</span>
-                                    </div>
-                                </a>
                             </div>
                             <div id="language-section">
                                 <div class="form-group d-flex justify-content-center align-items-center">
-                                    <label for="language_1" class="d-block my-1 me-3">Language:</label>
-                                    <input type="text" name="languages[]" id="language_1" class="d-block w-25 h-25 me-5 align-self-center">
+                                    <label for="language" class="d-block my-1 me-3">Language:</label>
+                                    <input type="text" name="language" id="language" class="d-block w-25 h-25 me-5 align-self-center">
                                     <div class="rating-container d-flex justify-content-center align-items-center">
                                         <label class="my-1 me-3">Proficiency:</label>
                                         <div>
                                             @for ($i = 1; $i <= 5; $i++)
-                                                <input type="radio" name="ratings[0]" id="rating_1_{{ $i }}" value="{{ $i }}" class="me-4 align-self-center mb-2 pb-1">
+                                                <input type="radio" name="proficiency" id="proficiency" value="{{ $i }}" class="me-4 align-self-center mb-2 pb-1">
                                             @endfor
                                         </div>                                        
                                     </div>
                                 </div>                                
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="p-3 py-5">
+                <div class="col-md-4 ms-2">
+                    <div class="p-3">
                         <div class="d-flex mb-3">
                             <h2 class="flex-grow-1">Experience Section</h2>
-                            <a class="text-decoration-none" type="button" id='add-experience-btn'>
-                                <div class="d-flex justify-content-between align-items-center experience">
-                                    <span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span>
-                                </div>
-                            </a>
                         </div>
                         <div id="experience-section">
-                            <div class="form-group d-flex justify-content-center align-items-center">
-                                <label for="language_1" class="my-1 me-3">Experience:</label>
-                                <input type="text" name="languages[]" id="language_1" class="d-block w-25 h-25 me-5 align-self-center">
-                            </div>                                
+                            <div class="form-group d-flex justify-content-center align-items-center flex-column" id="experience-section">
+                                <div class="col-md-12 mb-2">
+                                    <label class="labels">Title</label>
+                                    <input type="text" class="form-control" placeholder="Job Experience Title" name="title">
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <label class="labels">Description</label>
+                                    <input type="text" class="form-control" placeholder="Job Experience Description" name="description">
+                                </div>
+                                <div class="w-100">
+                                    <label for="experience_start_year" class="my-1">Start Year:</label>
+                                    <select name="experience_start_year" id="experience_start_year" class="w-25">
+                                        @for ($year = date('Y'); $year >= 1950; $year--)
+                                            <option value="{{ $year }}">{{ $year }}</option>
+                                        @endfor
+                                    </select>
+                                    <label for="experience_end_year" class="my-1 align-self-end">End Year:</label>
+                                    <select name="experience_end_year" id="experience_end_year" class="w-25 align-self-end">
+                                        @for ($year = date('Y'); $year >= 1950; $year--)
+                                            <option value="{{ $year }}">{{ $year }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>                          
+                        </div>
+
+                        <hr class="text-gray border-2 w-100 my-4" />
+
+                        <div class="container mt-3">
+                            <div class="d-flex mb-3">
+                                <h2 class="flex-grow-1">Language Section</h2>
+                            </div>
+                            <div id="language-section">
+                                <div class="form-group d-flex justify-content-center align-items-center">
+                                    <label for="language" class="d-block my-1 me-3">Language:</label>
+                                    <input type="text" name="language" id="language" class="d-block w-25 h-25 align-self-center">
+                                    <div class="rating-container d-flex justify-content-center align-items-center">
+                                        <label class="my-1 mx-3">Proficiency:</label>
+                                        <div>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <input type="radio" name="proficiency" id="proficiency" value="{{ $i }}" class="me-3 align-self-center mb-2 pb-1">
+                                            @endfor
+                                        </div>                                        
+                                    </div>
+                                </div>                                
+                            </div>
                         </div>
                     </div>
 
@@ -148,34 +181,8 @@
                 </div>
             </div>
             <div class="mt-5 text-center">
-                <button class="btn btn-primary profile-button" type="button">Save Profile</button>
+                <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
             </div>
-        </div>
+        </form>
     </div>
 @endsection
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        let languageIndex = 1;
-
-        document.getElementById('add-language-btn').addEventListener('click', function () {
-            languageIndex++;
-
-            const languageSection = document.getElementById('language-section');
-            const newLanguageEntry = document.createElement('div');
-            newLanguageEntry.classList.add('form-group', 'd-flex', 'justify-content-center', 'align-items-center');
-            newLanguageEntry.innerHTML = `
-                <label for="language_${languageIndex}" class="d-block my-1 me-3">Language:</label>
-                <input type="text" name="languages[]" id="language_${languageIndex}" class="d-block w-25 h-25 me-5 align-self-center">
-                <div class="rating-container d-flex justify-content-center align-items-center">
-                    <label class="my-1 me-3">Proficiency:</label>
-                    <div>
-                        ${Array.from({ length: 5 }, (_, i) => `
-                            <input type="radio" name="ratings[${languageIndex - 1}]" id="rating_${languageIndex}_${i + 1}" value="${i + 1}" class="me-4 align-self-center mb-2 pb-1">
-                        `).join('')}
-                    </div>                                        
-                </div>
-            `;
-            languageSection.appendChild(newLanguageEntry);
-        });
-    });
-</script>

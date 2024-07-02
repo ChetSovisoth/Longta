@@ -13,7 +13,7 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('save.index') }}">Job Saved</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/profile/edit">Profile</a>
+                        <a class="nav-link" href="/profile/">Profile</a>
                     </li>
                 @else
                     <li class="nav-item">

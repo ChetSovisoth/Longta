@@ -1,4 +1,4 @@
-@extends('layout.layout') {{-- Assuming you have a layout --}}
+@extends('layout.layout')
 
 @section('content')
     <div class="container">
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="ms-3 d-flex flex-column justify-content-between">
-                            <form action="{{ route('unsave.job', $job) }}" method="POST">
+                            <form action="{{ route('unsaved.job', $job) }}" method="POST">
                                 @csrf
                                 @method('POST')
                                 <button class="btn btn-primary btn-block mt-3 me-5 w-75 d-flex align-items-center justify-content-center" type="submit">

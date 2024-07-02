@@ -24,8 +24,8 @@
 
 <body class="d-flex flex-column vh-100 bg-main">
     @include('layout.nav')
-    {{-- @include('shared.success_popup')
-    @include('shared.danger_popup') --}}
+    @include('shared.success-popup')
+    @include('shared.danger-popup')
     <div class="container py-4">
         {{--Template--}}
         @yield('content')
