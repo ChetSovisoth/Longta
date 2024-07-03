@@ -4,16 +4,16 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="text-right">CV Settings</h1>
         </div>
-        <form class="row" action="{{ route('cv.update') }}" method="POST">
+        <form class="row" action="{{ route('cv.store') }}" method="POST">
             @csrf
-            @method('PUT')
+            @method('POST')
             <div class="d-flex">
                 <div class="col-md-3 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3">
                         <img class="rounded-circle mt-4 mb-2" width="150px"
                             src="https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"><span
-                            class="font-weight-bold">{{ $user->name }}</span><span
-                            class="text-black-50">{{ $user->email }}</span><span>
+                            class="font-weight-bold">{{ Auth::user()->name }}</span><span
+                            class="text-black-50">{{ Auth::user()->email }}</span><span>
                         </span>
                     </div>
                 </div>
@@ -24,28 +24,28 @@
                             <h3>Contact Section</h3>
                             <div class="col-md-12 mb-2">
                                 <label class="labels">Phone</label>
-                                <input type="text" class="form-control" placeholder="Phone number" name="phone" value="{{ $contact->phone }}">
+                                <input type="text" class="form-control" placeholder="Phone number" name="phone">
                                 @error('phone')
                                     <span class="d-block fs-6 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-12 mb-4">
                                 <label class="labels">Address</label>
-                                <input type="text" class="form-control" placeholder="Address" name="address" value="{{ $contact->address }}">
+                                <input type="text" class="form-control" placeholder="Address" name="address">
                                 @error('address')
                                     <span class="d-block fs-6 text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-md-12 d-flex justify-content-center align-items-center mb-4">
                                 <i class="fa-brands fa-github fa-2x text-center me-4"></i>
-                                <input type="text" class="form-control" placeholder="Github link" name="github" value="{{ $contact->github }}">
+                                <input type="text" class="form-control" placeholder="Github link" name="github">
                             </div>
                             @error('github')
                                 <span class="d-block fs-6 text-danger">{{ $message }}</span>
                             @enderror
                             <div class="col-md-12 d-flex justify-content-center align-items-center">
                                 <i class="fa-brands fa-linkedin fa-2x text-center me-4"></i>
-                                <input type="text" class="form-control" placeholder="LinkedIn link" name="linkedin" value="{{ $contact->linkedin }}">
+                                <input type="text" class="form-control" placeholder="LinkedIn link" name="linkedin">
                             </div>
                             @error('linkedin')
                                 <span class="d-block fs-6 text-danger">{{ $message }}</span>
@@ -58,7 +58,7 @@
                             <h3>Education Section</h3>
                             <div class="col-md-12 mb-2">
                                 <label class="labels">University</label>
-                                <input type="text" class="form-control" placeholder="university" name="university" value="{{ $education->university }}">   
+                                <input type="text" class="form-control" placeholder="university" name="university">   
                                 @error('university')
                                     <span class="d-block fs-6 text-danger">{{ $message }}</span>
                                 @enderror 
@@ -66,7 +66,6 @@
                             <div class="d-flex justify-content-between mb-2">
                                 <label for="uni_start_year" class="my-1">Start Year:</label>
                                 <select name="uni_start_year" id="uni_start_year" class="w-25">
-                                    <option value="{{ explode(' - ', $education->university_period)[0] }}">{{ explode(' - ', $education->university_period)[0] }}</option>
                                     @for ($year = date('Y'); $year >= 1950; $year--)
                                         <option value="{{ $year }}">{{ $year }}</option>
                                     @endfor
@@ -77,7 +76,6 @@
 
                                 <label for="uni_end_year" class="my-1">End Year:</label>
                                 <select name="uni_end_year" id="uni_end_year" class="w-25">
-                                    <option value="{{ explode(' - ', $education->university_period)[1] }}">{{ explode(' - ', $education->university_period)[1] }}</option>
                                     @for ($year = date('Y'); $year >= 1950; $year--)
                                         <option value="{{ $year }}">{{ $year }}</option>
                                     @endfor
@@ -89,7 +87,7 @@
 
                             <div class="col-md-12 mb-2">
                                 <label class="labels">High School</label>
-                                <input type="text" class="form-control" placeholder="highschool" name="highschool" value="{{ $education->highschool }}">
+                                <input type="text" class="form-control" placeholder="highschool" name="highschool">
                                 @error('highschool')
                                     <span class="d-block fs-6 text-danger">{{ $message }}</span>
                                 @enderror
@@ -97,7 +95,6 @@
                             <div class="d-flex justify-content-between">
                                 <label for="hs_start_year" class="my-1">Start Year:</label>
                                 <select name="hs_start_year" id="hs_start_year" class="w-25">
-                                    <option value="{{ explode(' - ', $education->highschool_period)[0] }}">{{ explode(' - ', $education->highschool_period)[0] }}</option>
                                     @for ($year = date('Y'); $year >= 1950; $year--)
                                         <option value="{{ $year }}">{{ $year }}</option>
                                     @endfor
@@ -108,7 +105,6 @@
 
                                 <label for="hs_end_year" class="my-1">End Year:</label>
                                 <select name="hs_end_year" id="hs_end_year" class="w-25">
-                                    <option value="{{ explode(' - ', $education->highschool_period)[1] }}">{{ explode(' - ', $education->highschool_period)[1] }}</option>
                                     @for ($year = date('Y'); $year >= 1950; $year--)
                                         <option value="{{ $year }}">{{ $year }}</option>
                                     @endfor
@@ -130,14 +126,14 @@
                             <div class="form-group d-flex justify-content-center align-items-center flex-column" id="experience-section">
                                 <div class="col-md-12 mb-2">
                                     <label class="labels">Title</label>
-                                    <input type="text" class="form-control" placeholder="Job Experience Title" name="title" value="{{ $experience->title }}">
+                                    <input type="text" class="form-control" placeholder="Job Experience Title" name="title">
                                     @error('title')
                                     <span class="d-block fs-6 text-danger">{{ $message }}</span>
                                 @enderror
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <label class="labels">Description</label>
-                                    <input type="text" class="form-control" placeholder="Job Experience Description" name="description" value="{{ $experience->description }}">
+                                    <input type="text" class="form-control" placeholder="Job Experience Description" name="description">
                                     @error('description')
                                         <span class="d-block fs-6 text-danger">{{ $message }}</span>
                                     @enderror
@@ -145,7 +141,6 @@
                                 <div class="w-100">
                                     <label for="experience_start_year" class="my-1">Start Year:</label>
                                     <select name="experience_start_year" id="experience_start_year" class="w-25 me-3">
-                                        <option value="{{ explode(' - ', $experience->experience_period)[0] }}">{{ explode(' - ', $experience->experience_period)[0] }}</option>
                                         @for ($year = date('Y'); $year >= 1950; $year--)
                                             <option value="{{ $year }}">{{ $year }}</option>
                                         @endfor
@@ -155,7 +150,6 @@
                                     @enderror
                                     <label for="experience_end_year" class="my-1 align-self-end">End Year:</label>
                                     <select name="experience_end_year" id="experience_end_year" class="w-25 align-self-end">
-                                        <option value="{{ explode(' - ', $experience->experience_period)[1] }}">{{ explode(' - ', $experience->experience_period)[1] }}</option>
                                         @for ($year = date('Y'); $year >= 1950; $year--)
                                             <option value="{{ $year }}">{{ $year }}</option>
                                         @endfor
@@ -176,16 +170,12 @@
                             <div id="language-section">
                                 <div class="form-group d-flex justify-content-center align-items-center">
                                     <label for="language" class="d-block my-1 me-3">Language:</label>
-                                    <input type="text" name="language" id="language" class="d-block w-25 h-25 align-self-center" value="{{ $language->language}}">
+                                    <input type="text" name="language" id="language" class="d-block w-25 h-25 align-self-center">
                                     <div class="rating-container d-flex justify-content-center align-items-center">
                                         <label class="my-1 mx-3">Proficiency:</label>
                                         <div>
                                             @for ($i = 1; $i <= 5; $i++)
-                                                @if($i == $language->proficiency)
-                                                    <input type="radio" name="proficiency" checked="checked" id="proficiency" value="{{ $language->proficiency }}" class="me-3 align-self-center mb-2 pb-1">
-                                                @else
-                                                    <input type="radio" name="proficiency" id="proficiency" value="{{ $i }}" class="me-3 align-self-center mb-2 pb-1">
-                                                @endif
+                                                <input type="radio" name="proficiency" id="proficiency" value="{{ $i }}" class="me-3 align-self-center mb-2 pb-1">
                                             @endfor
                                         </div>                                        
                                     </div>
@@ -207,15 +197,8 @@
                 </div>
             </div>
             <div class="mt-5 text-center">
-                <button class="btn btn-primary" type="submit">Save Profile</button>
+                <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
             </div>
         </form>
-        <div class="d-flex flex-row-reverse">
-            <form action="{{ route("cv.destroy") }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger" type="submit">Delete Profile</button>
-            </form>
-        </div>
     </div>
 @endsection

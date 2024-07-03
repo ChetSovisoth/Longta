@@ -12,13 +12,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/profile/edit', function () {
-    return view('profile.profile_edit');
-});
+Route::get('/profile/create', function () {
+    return view('profile.profile_create');
+})->name('cv.create');
 
 Auth::routes(['verify'=> true]);
 
 Route::get('/profile', [CVController::class,'index'])->name('cv');
+
+Route::get('/profile/edit', [CVController::class,'edit'])->name('cv.edit');
+
+Route::put('/profile/update', [CVController::class,'update'])->name('cv.update');
+
+Route::delete('/profile/delete', [CVController::class,'destroy'])->name('cv.destroy');
 
 Route::post('/admin/job', [JobController::class, 'store'])->name('admin.job.store');
 

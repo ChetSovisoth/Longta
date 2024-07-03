@@ -1,22 +1,24 @@
 @extends('layout.layout')
 @section('content')
-    {{-- <a class="btn btn-danger" href="{{ route('logout') }}"
-        onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-        {{ __('Logout') }}
-    </a>
-
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-        @csrf
-    </form> --}}
     <div class="d-flex justify-content-center mt-5">
         <img src="https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg" alt="Profile Pic"
              style="width: 100px; height:100px; border-radius: 100px;" />
     </div>
     <div class="d-flex justify-content-center  pt-4">
-        <h5>{{ Auth::user()->name }}</h5>
+        <h5>{{ $user->name }}</h5>
     </div>
-    <div class="d-flex justify-content-center ">{{ Auth::user()->email }}</div>
+    <div class="d-flex justify-content-center mb-4">{{ $user->email }}</div>
+    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+        @if ((new App\Models\User())->userHasCV())
+            <a class="btn btn-info" href="{{ route('cv.edit') }}">
+                Edit
+            </a>
+        @else
+            <a class="btn btn-success" href="{{ route('cv.create') }}">
+                Create
+            </a>
+        @endif
+    </div>
 
     <hr class="text-gray border-2 w-100 my-4" />
 
@@ -32,7 +34,7 @@
             <div>
                 <h3>Language Information</h3>
                 <p class="m-0 mb-2"><strong>Language:</strong> {{ $language->language }}</p>
-                <p class="m-0 mb-2"><strong>Proficiency:</strong> {{ $language->proficiency }}/5</p>
+                <p class="m-0 mb-2"><strong>Proficiency:</strong> {{ $language->proficiency }} {{ $language->proficiency == null ? '': '/5'}}</p>
             </div>
         </div>
         <div class="flex-grow-1">

@@ -9,11 +9,21 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 @auth
-                    <li class="nav-item me-3">
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('save.index') }}">Job Saved</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/profile/">Profile</a>
+                        <a class="nav-link active" href="/profile/">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </li>
                 @else
                     <li class="nav-item">
