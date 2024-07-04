@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class UsersSeeder extends Seeder
 {
@@ -14,47 +15,55 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
+        $now = Carbon::now();
         $users =[
             [
                 "name"=> "admin",
                 "email"=> "admin@jobboard.com",
                 "role"=> "admin",
+                "email_verified_at"=> $now,
                 "password"=> Hash::make("123456789"),
             ],
             [
                 "name"=> "Yean Daralongta",
                 "email"=> "daralongta@gmail.com",
                 "role"=> "employer",
+                "email_verified_at"=> $now,
                 "password"=> Hash::make("123456789"),
             ],
             [
                 "name"=> "Chet Sovisoth",
                 "email"=> "sovisoth@gmail.com",
                 "role"=> "employer",
+                "email_verified_at"=> $now,
                 "password"=> Hash::make("123456789"),
             ],
             [
                 "name"=> "Srun Davith",
                 "email"=> "davith@gmail.com",
                 "role"=> "employer",
+                "email_verified_at"=> $now,
                 "password"=> Hash::make("123456789"),
             ],
             [
                 "name"=> "Thy Chamroeunpiseth",
                 "email"=> "chamroeunpiseth@gmail.com",
                 "role"=> "employer",
+                "email_verified_at"=> $now,
                 "password"=> Hash::make("123456789"),
             ],
             [
                 "name"=> "Sok Sousrun",
                 "email"=> "sousrun@gmail.com",
                 "role"=> "employer",
+                "email_verified_at"=> $now,
                 "password"=> Hash::make("123456789"),
             ],
             [
                 "name"=> "Say Vanchhai",
                 "email"=> "vanchhai@gmail.com",
-                "role"=> "seeker",
+                "role"=> "seeker",      
+                "email_verified_at"=> $now,
                 "password"=> Hash::make("123456789"),
             ],
         ];
