@@ -46,8 +46,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function userHasCV() {
-        $user_id = $this->id;
+    public function userHasCV($user_id) {
         return Education::where('user_id', $user_id)->exists();
     }
 }

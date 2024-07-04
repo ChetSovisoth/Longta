@@ -9,7 +9,7 @@
     </div>
     <div class="d-flex justify-content-center mb-4">{{ $user->email }}</div>
     <div class="d-flex justify-content-center align-items-center flex-grow-1">
-        @if ((new App\Models\User())->userHasCV())
+        @if ((new App\Models\User())->userHasCV($user->id))
             <a class="btn btn-info" href="{{ route('cv.edit') }}">
                 Edit
             </a>
