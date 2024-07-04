@@ -71,7 +71,7 @@ class CVController extends Controller
             'highschool_period'=> $validated['hs_start_year'] . ' - ' .$validated['hs_end_year'],
         ]);
 
-        return redirect()->back()->with('success','CV Saved!');
+        return redirect()->route('cv')->with('success','CV Saved!');
     }
 
     public function edit() {
@@ -146,6 +146,6 @@ class CVController extends Controller
         Education::where("user_id", $user_id)->first()->delete();
         Contact::where("user_id", $user_id)->first()->delete();
 
-        return view('profile.profile_create');
+        return redirect()->route("cv.create")->with("danger","CV Deleted!");
     }
 } 
