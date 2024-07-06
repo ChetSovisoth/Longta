@@ -26,21 +26,23 @@ Route::get('/email/verify/user', function (Request $request) {
 
 Route::get('/profile/create', function () {
     return view('profile.profile_create');
-})->name('cv.create');
+})->middleware('auth')->name('cv.create');
 
 Auth::routes(['verify'=> true]);
 
-Route::get('/profile', [CVController::class,'index'])->name('cv');
+Route::get('/profile', [CVController::class,'index'])->middleware('auth')->name('cv');
 
-Route::get('/profile/{cv}', [CVController::class,'show'])->name('cv.show');
+Route::get('/profile/{cv}', [CVController::class,'show'])->middleware('auth')->name('cv.show');
 
-Route::get('/profile/edit/{cv}', [CVController::class,'edit'])->name('cv.edit');
+Route::get('/profile/edit/{cv}', [CVController::class,'edit'])->middleware('auth')->name('cv.edit');
 
-Route::put('/profile/update/{cv}', [CVController::class,'update'])->name('cv.update');
+Route::put('/profile/update/{cv}', [CVController::class,'update'])->middleware('auth')->name('cv.update');
 
-Route::delete('/profile/delete', [CVController::class,'destroy'])->name('cv.destroy');
+Route::delete('/profile/delete', [CVController::class,'destroy'])->middleware('auth')->name('cv.destroy');
 
-Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+Route::get('/jobs', [JobController::class, 'index'])->middleware('auth')->name('jobs.index');
+
+Route::post('/cv/save', [CVController::class,'store'])->middleware('auth')->name('cv.store');
 
 Route::group([
     'middleware' => VerifyMiddleware::class
@@ -54,4 +56,3 @@ Route::group([
 
     Route::post('/unsaved/job/{job}', [SaveJobController::class,'unsave'])->name('unsaved.job');
 });
-Route::post('/cv/save', [CVController::class,'store'])->name('cv.store');
