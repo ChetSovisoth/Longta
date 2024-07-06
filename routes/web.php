@@ -26,9 +26,11 @@ Auth::routes(['verify'=> true]);
 
 Route::get('/profile', [CVController::class,'index'])->name('cv');
 
-Route::get('/profile/edit', [CVController::class,'edit'])->name('cv.edit');
+Route::get('/profile/{cv}', [CVController::class,'show'])->name('cv.show');
 
-Route::put('/profile/update', [CVController::class,'update'])->name('cv.update');
+Route::get('/profile/edit/{cv}', [CVController::class,'edit'])->name('cv.edit');
+
+Route::put('/profile/update/{cv}', [CVController::class,'update'])->name('cv.update');
 
 Route::delete('/profile/delete', [CVController::class,'destroy'])->name('cv.destroy');
 

@@ -4,7 +4,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="text-right">CV Settings</h1>
         </div>
-        <form class="row" action="{{ route('cv.update') }}" method="POST">
+        <form class="row" action="{{ route('cv.update', $cv) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="d-flex">
@@ -210,12 +210,5 @@
                 <button class="btn btn-primary" type="submit">Save Profile</button>
             </div>
         </form>
-        <div class="d-flex flex-row-reverse">
-            <form action="{{ route("cv.destroy") }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger" type="submit">Delete Profile</button>
-            </form>
-        </div>
     </div>
 @endsection

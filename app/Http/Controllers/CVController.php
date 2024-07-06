@@ -14,12 +14,20 @@ class CVController extends Controller
     public function index() {
         $user = Auth::user();
         
-        $experience = Experience::firstOrNew(["user_id" => $user->id]);
-        $language = Language::firstOrNew(["user_id" => $user->id]);
-        $education = Education::firstOrNew(["user_id" => $user->id]);
-        $contact = Contact::firstOrNew(["user_id" => $user->id]);
+        $totalCv = Experience::where('user_id', $user->id)->get();
+        return view("profile.profile", compact("totalCv", "user"));
+    }
 
-        return view("profile.profile", compact("experience","language","education","contact", "user"));
+    public function show($cv) {
+        $user = Auth::user();
+
+        $experience = Experience::where('id', $cv)->first();
+        $language = Language::where('id', $cv)->first();
+        $education = Education::where('id', $cv)->first();
+        $contact = Contact::where("id", $cv)->first();
+
+        // dd(Education::where('id', $cv)->get());
+        return view("profile.profile_show", compact("experience", "user", 'language', 'education', 'contact', 'cv'));
     }
     public function store(Request $request){
         $validated = $request->validate([
@@ -74,18 +82,18 @@ class CVController extends Controller
         return redirect()->route('cv')->with('success','CV Saved!');
     }
 
-    public function edit() {
+    public function edit($cv) {
         $user = Auth::user();
         
-        $experience = Experience::where("user_id", $user->id)->first();
-        $language = Language::where("user_id", $user->id)->first();
-        $education = Education::where("user_id", $user->id)->first();
-        $contact = Contact::where("user_id", $user->id)->first();
+        $experience = Experience::where("id", $cv)->first();
+        $language = Language::where("id", $cv)->first();
+        $education = Education::where("id", $cv)->first();
+        $contact = Contact::where("id", $cv)->first();
 
-        return view("profile.profile_edit", compact("experience","language","education","contact", "user"));
+        return view("profile.profile_edit", compact("experience","language","education","contact", "user", "cv"));
     }
 
-    public function update(Request $request) {
+    public function update(Request $request, $cv) {
         $validated = $request->validate([
             "phone"=> "required",
             "address"=> "required",
@@ -131,12 +139,7 @@ class CVController extends Controller
             'experience_period' => $validated['experience_start_year'] . ' - ' .$validated['experience_end_year'],
         ]);
 
-        $experience = Experience::where("user_id", $user->id)->first();
-        $language = Language::where("user_id", $user->id)->first();
-        $education = Education::where("user_id", $user->id)->first();
-        $contact = Contact::where("user_id", $user->id)->first();
-
-        return view("profile.profile", compact("experience","language","education","contact", "user"));
+        return redirect()->back()->with('success', 'Update Completed');
     }
     public function destroy(){
         $user_id = Auth::user()->id;
